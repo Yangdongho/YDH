@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- 컨트롤러에서 return 부분에 prefix(앞),suffix(뒤)로 추가할 것 설정-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+		<property value="/jsp/" name="prefix" />
+		<property value=".jsp" name="suffix" />
+	</bean>
+
+	<!-- (Html-Form에서 멀티파트 전송시)멀티파트를 처리하기위한 resolver 등록 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</bean>
+	
+	<!--  interceptor사용시 가로챌 url설정
+		
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/board/writeForm"/>
+			<mvc:mapping path="/board/write"/>
+			<ref bean="interceptor"/>
+		</mvc:interceptor>
+	
+	</mvc:interceptors>
+	-->
+	
+	<!--  웹소켓을 설정
+	<websocket:message-broker application-destination-prefix="/client">
+		<websocket:stomp-endpoint path="/chat">
+		<websocket:sockjs></websocket:sockjs>
+		</websocket:stomp-endpoint>
+		<websocket:simple-broker prefix="/topic"/>	
+	</websocket:message-broker> --> 
+</beans>
